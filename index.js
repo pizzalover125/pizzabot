@@ -1,14 +1,20 @@
+// require dotenv to have .env vars
 require("dotenv").config();
 
+// installs
 const { App } = require("@slack/bolt");
 const axios = require("axios");
 
+// initalize the app
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
   appToken: process.env.SLACK_APP_TOKEN,
   socketMode: true,
 });
 
+// define commands
+
+// ping command
 app.command("/pizzabot-ping", async ({ command, ack, respond }) => {
   const start = Date.now();
   await ack();
@@ -16,6 +22,7 @@ app.command("/pizzabot-ping", async ({ command, ack, respond }) => {
   await respond({ text: `pizzaBot is alive!\nLatency: ${latency}ms` });
 });
 
+// help command
 app.command("/pizzabot-help", async ({ ack, respond }) => {
   await ack();
   await respond({
@@ -28,6 +35,7 @@ app.command("/pizzabot-help", async ({ ack, respond }) => {
   });
 });
 
+// recipe command
 app.command("/pizzabot-recipe", async ({ ack, respond }) => {
   await ack();
   await respond({
@@ -42,6 +50,7 @@ app.command("/pizzabot-recipe", async ({ ack, respond }) => {
   });
 });
 
+// ingredients command
 app.command("/pizzabot-ingredients", async ({ ack, respond }) => {
   await ack();
   await respond({
@@ -53,6 +62,7 @@ app.command("/pizzabot-ingredients", async ({ ack, respond }) => {
   });
 });
 
+// joke command
 app.command("/pizzabot-joke", async ({ ack, respond }) => {
   await ack();
 
